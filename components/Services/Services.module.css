@@ -1,0 +1,21 @@
+.service__background {
+  position: relative;
+  background-size: cover;
+  width: 100%;
+}
+
+.service__background::before {
+  content: '';
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+  background-color: rgba(0, 0, 0, 0.75);
+}
+
+.service__line {
+  width: 100%;
+  height: 1px;
+  background: #fff;
+}

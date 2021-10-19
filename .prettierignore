@@ -1,0 +1,16 @@
+node_modules/
+vendor/
+storage/
+dist/
+lib/
+.directory/
+web/
+config/
+.env
+.composer/
+composer.json
+composer.lock
+package.json
+package-lock.json
+yarn.lock
+webpack*
