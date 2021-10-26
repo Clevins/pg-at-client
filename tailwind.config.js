@@ -10,6 +10,7 @@ module.exports = {
         darkTurquoise: '#08D9D6',
         irisBlue: '#00ADB5',
         Whisper: '#E5E5E5',
+        bunker: '#222831',
       },
       fontFamily: {
         Montserrat: 'Montserrat',
@@ -23,4 +24,4 @@ module.exports = {
     extend: {},
   },
   plugins: [require('@tailwindcss/aspect-ratio')],
-};
+}

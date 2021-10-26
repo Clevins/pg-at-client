@@ -6,6 +6,7 @@ import AboutMe from '@components/AboutMe'
 import Services from '@components/Services'
 import Videos from '@components/Videos'
 import Blogs from '@components/Blogs'
+import Section from '@components/Section'
 
 const env = process.env.NODE_ENV
 const devApiUrl = 'http://localhost:1337'
@@ -21,9 +22,6 @@ export default function Index({ data, videoShelves }: any) {
         deaktopHeroUrl={data.Home_Hero.desktopImage.url}
         mobileHeroUrl={data.Home_Hero.mobileImage.url}
       />
-      {/* {console.log(data)} */}
-      {/* {console.log(videoShelves)} */}
-
       <AboutMe
         profileImage={data.Home_ProfileImage}
         aboutMeSections={data.Home_AboutMe}
@@ -33,9 +31,29 @@ export default function Index({ data, videoShelves }: any) {
         homeServices={data.Home_Services}
       />
       <Videos videoShelves={videoShelves} />
+      <Section
+        title="Read My Thesis"
+        subTitle="The Role of Sports Psychologists in Treating Injuried Athletes"
+      >
+        <button className="w-24 h-8 mx-auto my-1 text-white rounded-lg lg:my-0 lg:h-10 bg-irisBlue hover:bg-darkTurquoise focus:outline-none">
+          <p>Read More</p>
+        </button>
+      </Section>
       <Blogs blogs={data.latest_blogs} />
+      <Section title="Like What I Do?" subTitle="Sign Up To My Newsletter">
+        <div className="flex flex-row mx-auto ">
+          <input
+            className="w-full px-4 py-2 mx-2 italic leading-tight text-gray-400 border-2 rounded appearance-none bg-bunker border-bunker focus:outline-none focus:bg-bunker focus:border-irisBlue"
+            id="inline-full-name"
+            type="email"
+            value="Enter Your Email"
+          />
 
-      <h2>Index</h2>
+          <button className="h-8 mx-2 my-1 text-white rounded w-36 lg:my-0 lg:h-10 bg-irisBlue hover:bg-darkTurquoise focus:outline-none">
+            <p>Sign Up</p>
+          </button>
+        </div>
+      </Section>
     </>
   )
 }

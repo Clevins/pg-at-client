@@ -14,7 +14,7 @@ const LatestBlogs: FC<BlogProps> = ({ blogData }) => {
             <h4 className="my-1 text-base font-semibold lg:text-4xl text-thunder lg:my-0">
               {title}
             </h4>
-            <h2 className="my-1 text-sm italic font-normal lg:text-xl text-darkTurquoise lg:mt-2">
+            <h2 className="my-1 text-sm italic font-normal lg:text-xl text-irisBlue lg:mt-2">
               By {author} - {upload_date}
             </h2>
           </div>
@@ -23,7 +23,7 @@ const LatestBlogs: FC<BlogProps> = ({ blogData }) => {
             {description}
           </p>
           <a>
-            <button className="self-start w-24 h-8 my-1 text-white rounded-lg lg:my-0 lg:h-10 bg-darkTurquoise hover:bg-irisBlue focus:outline-none">
+            <button className="self-start w-24 h-8 my-1 text-white rounded-lg lg:my-0 lg:h-10 bg-irisBlue hover:bg-darkTurquoise focus:outline-none">
               <p>Read More</p>
             </button>
           </a>
