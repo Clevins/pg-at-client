@@ -1,9 +1,10 @@
-import React, { FunctionComponent } from 'react';
-import Logo from '@logos/logo.svg';
-import MenuIcon from '@icons/menu.svg';
-import { useRouter } from 'next/router';
-import Socials from '@components/Socials';
-import { SocialsProps } from '@customTypes/SocialsProps';
+import React, { FunctionComponent } from 'react'
+import Logo from '@logos/logo.svg'
+import MenuIcon from '@icons/menu.svg'
+import { useRouter } from 'next/router'
+import Socials from '@components/Socials'
+import { SocialsProps } from '@customTypes/SocialsProps'
+import getNavItems from 'lib/getNavItems'
 
 /* ToDo
  * Fix animation on mobile screens.
@@ -11,38 +12,11 @@ import { SocialsProps } from '@customTypes/SocialsProps';
  * Abstract Props to type folder
  */
 const Navbar: FunctionComponent<SocialsProps> = ({ socialLinks }) => {
-  const [mobileNavOpen, setMobileNavOpen] = React.useState(false);
-  const router = useRouter();
+  const [mobileNavOpen, setMobileNavOpen] = React.useState(false)
 
-  interface INavItems {
-    name: string;
-    url: string;
-    active: boolean;
-  }
+  const router = useRouter()
 
-  const navItems: INavItems[] = [
-    { name: 'Home', url: '/', active: router.asPath === '/' },
-    {
-      name: 'About Me',
-      url: '/about',
-      active: router.asPath === '/about',
-    },
-    {
-      name: 'Contact',
-      url: '/contact',
-      active: false,
-    },
-    {
-      name: 'Videos',
-      url: '/',
-      active: false,
-    },
-    {
-      name: 'Blogs',
-      url: '/',
-      active: false,
-    },
-  ];
+  const navItems = getNavItems(router.asPath)
 
   return (
     <div
@@ -95,7 +69,7 @@ const Navbar: FunctionComponent<SocialsProps> = ({ socialLinks }) => {
         </button>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Navbar;
+export default Navbar

@@ -1,23 +1,24 @@
-import React from 'react'
+import React, { ReactElement } from 'react'
 import { GetStaticProps } from 'next'
-import Navbar from '@components/Navbar'
+import Layout from '@components/Layout'
 import Hero from '@components/Hero'
 import AboutMe from '@components/AboutMe'
 import Services from '@components/Services'
 import Videos from '@components/Videos'
 import Blogs from '@components/Blogs'
 import Section from '@components/Section'
+import handleFetchError from 'lib/handleFetchError'
 
 const env = process.env.NODE_ENV
-const devApiUrl = 'http://localhost:1337'
-const prodApiUrl = 'https://hidden-reef-22167.herokuapp.com'
+const devApiUrl = process.env.DEV_API_URL
+const prodApiUrl = process.env.PROD_API_URL
 
 console.log(process.env.NODE_ENV)
 
 export default function Index({ data, videoShelves }: any) {
+  console.log(data)
   return (
     <>
-      <Navbar socialLinks={data.Home_SocialLinks} />
       <Hero
         deaktopHeroUrl={data.Home_Hero.desktopImage.url}
         mobileHeroUrl={data.Home_Hero.mobileImage.url}
@@ -46,7 +47,7 @@ export default function Index({ data, videoShelves }: any) {
             className="w-full px-4 py-2 mx-2 italic leading-tight text-gray-400 border-2 rounded appearance-none bg-bunker border-bunker focus:outline-none focus:bg-bunker focus:border-irisBlue"
             id="inline-full-name"
             type="email"
-            value="Enter Your Email"
+            placeholder="Enter Your Email"
           />
 
           <button className="h-8 mx-2 my-1 text-white rounded w-36 lg:my-0 lg:h-10 bg-irisBlue hover:bg-darkTurquoise focus:outline-none">
@@ -58,12 +59,21 @@ export default function Index({ data, videoShelves }: any) {
   )
 }
 
+Index.getLayout = function getLayout(page: ReactElement) {
+  return <Layout>{page}</Layout>
+}
+
 export const getStaticProps: GetStaticProps = async () => {
   let data,
     videoShelves = {}
 
-  // try {
   const apiUrl = env === 'development' ? devApiUrl : prodApiUrl
+
+  if (!apiUrl) {
+    return {
+      notFound: true,
+    }
+  }
 
   data = await getHomeData(apiUrl)
 
@@ -75,29 +85,15 @@ export const getStaticProps: GetStaticProps = async () => {
     }),
   )
 
-  // console.log(videoShelves)
-
-  if (!data || !videoShelves) {
-    return {
-      notFound: true,
-    }
-  }
-  // } catch (e) {
-  //   return {
-  //     notFound: true,
-  //   }
-  // }
-
   return {
-    props: { data, videoShelves }, // will be passed to the page component as props
+    props: { data, videoShelves },
   }
 }
-
-//     `http://sub.peteguay-athletic-therapy.eu-west-1.elasticbeanstalk.com/home`,
 
 async function getHomeData(apiUrl: string) {
   const res = await fetch(`${apiUrl}/home`)
   const data = await res.json()
+  handleFetchError(data)
   return data
 }
 
@@ -105,8 +101,9 @@ async function getVideos(videoIds: string[], apiUrl: string) {
   const videos = await Promise.all(
     videoIds.map(async (videoId) => {
       const res = await fetch(`${apiUrl}/videos/${videoId}`)
-      const json = await res.json()
-      return json
+      const data = await res.json()
+      handleFetchError(data)
+      return data
     }),
   )
 
