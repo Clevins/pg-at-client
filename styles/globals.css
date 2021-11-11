@@ -23,6 +23,35 @@ a {
   --swiper-theme-color: #000;
 }
 
+@layer utilities {
+  .absoulte_center {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .absoulte_center_top {
+    position: absolute;
+    left: 50%;
+    top: 40%;
+    transform: translate(-50%, -50%);
+  }
+
+  .absoulte_center_bottom {
+    position: absolute;
+    left: 50%;
+    top: 85%;
+    transform: translate(-50%, -50%);
+  }
+
+  .absoulte_bottom_right {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+  }
+}
+
 /* Global Video Player Style */
 
 .react-player__preview {

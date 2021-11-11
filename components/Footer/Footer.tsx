@@ -18,12 +18,12 @@ const Footer: FC<SocialsProps> = ({ socialLinks }) => {
 
       {/* Nav Items */}
       <div>
-        <ul className="flex flex-row justify-center w-auto h-auto mt-5 font-semibold list-none font-Montserrat">
+        <ul className="flex flex-row flex-wrap justify-center w-auto h-auto mt-5 font-semibold list-none font-Montserrat">
           {navItems.map(({ name, url, active }) => (
             <li className="my-1" key={`${name}`}>
               <a
                 href={`${url}`}
-                className={`p-2 transition duration-300 ease-in-out outline-none cursor focus:outline-none hover:text-darkTurquoise text-sm
+                className={`p-2 transition duration-300 ease-in-out outline-none opacity-75 cursor focus:outline-none hover:text-darkTurquoise text-sm
                     ${active && 'text-darkTurquoise'}`}
               >
                 {name}
@@ -33,7 +33,7 @@ const Footer: FC<SocialsProps> = ({ socialLinks }) => {
         </ul>
       </div>
 
-      <p className="pb-4 mt-5 text-sm font-bold text-center text-white font-Montserrat ">
+      <p className="pb-4 mt-5 text-sm font-bold text-center text-white opacity-75 font-Montserrat ">
         Designed and built by{' '}
         <a
           href="https://www.linkedin.com/in/cormac-levins-a152a8109"

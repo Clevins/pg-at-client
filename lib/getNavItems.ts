@@ -24,8 +24,8 @@ export default function getNavItems(path: string) {
     },
     {
       name: 'Blogs',
-      url: '/',
-      active: false,
+      url: '/blogs',
+      active: path === '/blogs',
     },
   ]
 

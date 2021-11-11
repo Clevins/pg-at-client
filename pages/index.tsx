@@ -5,7 +5,7 @@ import Hero from '@components/Hero'
 import AboutMe from '@components/AboutMe'
 import Services from '@components/Services'
 import Videos from '@components/Videos'
-import Blogs from '@components/Blogs'
+import { LatestBlogs } from '@components/Blogs'
 import Section from '@components/Section'
 import handleFetchError from 'lib/handleFetchError'
 
@@ -22,7 +22,16 @@ export default function Index({ data, videoShelves }: any) {
       <Hero
         deaktopHeroUrl={data.Home_Hero.desktopImage.url}
         mobileHeroUrl={data.Home_Hero.mobileImage.url}
-      />
+      >
+        <div className="absolute text-center text-white transform -translate-x-1/2 font-Montserrat whitespace-nowrap -translate-y-1/3 top-1/3 left-1/2 ">
+          <div className="text-4xl font-semibold lg:text-5xl text-shadow ">
+            <h1>Pete Guay</h1>
+          </div>
+          <div className="mt-1 text-3xl font-normal lg:text-4xl text-darkTurquoise">
+            <h2>Atletic Therapy</h2>
+          </div>
+        </div>
+      </Hero>
       <AboutMe
         profileImage={data.Home_ProfileImage}
         aboutMeSections={data.Home_AboutMe}
@@ -40,7 +49,7 @@ export default function Index({ data, videoShelves }: any) {
           <p>Read More</p>
         </button>
       </Section>
-      <Blogs blogs={data.latest_blogs} />
+      <LatestBlogs blogs={data.latest_blogs} showViewAllBtn={true} />
       <Section title="Like What I Do?" subTitle="Sign Up To My Newsletter">
         <div className="flex flex-row mx-auto ">
           <input
@@ -93,7 +102,7 @@ export const getStaticProps: GetStaticProps = async () => {
 async function getHomeData(apiUrl: string) {
   const res = await fetch(`${apiUrl}/home`)
   const data = await res.json()
-  handleFetchError(data)
+  handleFetchError(data, 'Error with Homepage request')
   return data
 }
 
@@ -102,7 +111,7 @@ async function getVideos(videoIds: string[], apiUrl: string) {
     videoIds.map(async (videoId) => {
       const res = await fetch(`${apiUrl}/videos/${videoId}`)
       const data = await res.json()
-      handleFetchError(data)
+      handleFetchError(data, 'Error with Homepage videos request')
       return data
     }),
   )

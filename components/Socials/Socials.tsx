@@ -7,7 +7,7 @@ import type { SocialsProps, ISocialLink } from '@customTypes/SocialsProps'
 
 const Socials: FunctionComponent<SocialsProps> = ({ socialLinks }) => {
   return (
-    <ul className="flex flex-row content-center mt-2 lg:justify-evenly lg:mt-0">
+    <ul className="flex flex-row content-center mt-2 justify-evenly ">
       {socialLinks.map((socialLink: ISocialLink) => {
         const { id, url, name, icon } = socialLink
         return (

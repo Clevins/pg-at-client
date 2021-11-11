@@ -1,8 +1,6 @@
-export default function handleFetchError(req: any) {
+export default function handleFetchError(req: any, msg: string) {
   if (req.error) {
-    throw new Error(
-      `Error with Homepage Request: ${req.error} \nStatus Code: ${req.statusCode}`,
-    )
+    throw new Error(`${msg}: ${req.error} \nStatus Code: ${req.statusCode}`)
   }
   return req
 }

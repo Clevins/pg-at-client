@@ -16,8 +16,9 @@ export interface IBlog {
 
 export type BlogsProps = {
   blogs: IBlog[]
+  showViewAllBtn?: boolean
 }
 
 export type BlogProps = {
-  blogData: IBlog
+  blog: IBlog
 }
