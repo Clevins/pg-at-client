@@ -1,4 +1,9 @@
 module.exports = {
+  reactStrictMode: true,
+  env: {
+    DEV_API_URL: process.env.DEV_API_URL,
+    PROD_API_URL: process.env.PROD_API_URL,
+  },
   serverRuntimeConfig: {
     apiBaseUrl: process.env.API_BASE_URL, // Pass through env variables
   },
@@ -8,8 +13,8 @@ module.exports = {
     config.watchOptions = {
       poll: 1000, // Check for changes every second
       aggregateTimeout: 300, // delay before rebuilding
-    };
-    return config;
+    }
+    return config
   },
   webpack(config) {
     config.module.rules.push({
@@ -18,13 +23,13 @@ module.exports = {
         test: /\.(js|ts)x?$/,
       },
       use: ['@svgr/webpack'],
-    });
+    })
 
-    return config;
+    return config
   },
   future: {
     webpack5: false,
   },
   jsconfigPaths: true,
   target: 'server',
-};
+}
