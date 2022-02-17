@@ -1,12 +1,10 @@
-export interface IAboutMeSection {
-  id: string;
-  title: string;
-  descption: string;
+import { IAboutMeSection, IProfileImage } from './AboutMeSectionProps'
+
+export interface IAboutMeData {
+  Home_ProfileImage: IProfileImage
+  Home_AboutMe: IAboutMeSection[]
 }
 
 export type AboutMeProps = {
-  profileImage: {
-    url: string;
-  };
-  aboutMeSections: IAboutMeSection[];
-};
+  data: IAboutMeData
+}

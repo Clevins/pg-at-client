@@ -1,9 +1,10 @@
-import React, { ReactElement } from 'react'
+import React, { FC, ReactElement } from 'react'
 import { GetStaticProps } from 'next'
 import Hero from '@components/Hero'
 import { LatestBlogs, AllBlogs } from '@components/Blogs'
 import Layout from '@components/Layout'
 import handleFetchError from 'lib/handleFetchError'
+import { BlogsPageProps } from '@customTypes/BlogsProps'
 
 const env = process.env.NODE_ENV
 const devApiUrl = 'http://localhost:1337'
@@ -11,13 +12,13 @@ const prodApiUrl = 'https://hidden-reef-22167.herokuapp.com'
 
 console.log(process.env.NODE_ENV)
 
-export default function Blogs({ data }: any) {
+const Blogs: FC<BlogsPageProps> = ({ data }) => {
   console.log(data)
   return (
     <>
       <Hero
-        deaktopHeroUrl={data.Blogs_Hero.desktopImage.url}
-        mobileHeroUrl={data.Blogs_Hero.mobileImage.url}
+        desktopImage={data.Blogs_Hero.desktopImage}
+        mobileImage={data.Blogs_Hero.mobileImage}
       >
         <div className="absolute text-center text-white transform -translate-x-1/2 font-Montserrat whitespace-nowrap -translate-y-1/3 top-2/4 left-1/2 ">
           <div className="text-4xl font-semibold lg:text-5xl text-shadow ">
@@ -32,7 +33,7 @@ export default function Blogs({ data }: any) {
   )
 }
 
-Blogs.getLayout = function getLayout(page: ReactElement) {
+;(Blogs as any).getLayout = function getLayout(page: ReactElement) {
   return <Layout>{page}</Layout>
 }
 
@@ -60,3 +61,5 @@ async function getBlogsData(apiUrl: string) {
   handleFetchError(data, 'Error With All Blogs Request')
   return data
 }
+
+export default Blogs

@@ -1,13 +1,14 @@
-import React, { ReactElement } from 'react'
+import React, { FC, ReactElement } from 'react'
 import { GetStaticProps } from 'next'
 import Layout from '@components/Layout'
 import Hero from '@components/Hero'
 import AboutMe from '@components/AboutMe'
 import Services from '@components/Services'
-import Videos from '@components/Videos'
+import VideoShelves from '@components/VideoShelves'
 import { LatestBlogs } from '@components/Blogs'
 import Section from '@components/Section'
 import handleFetchError from 'lib/handleFetchError'
+import { HomeProps } from '@customTypes/HomeProps'
 
 const env = process.env.NODE_ENV
 const devApiUrl = process.env.DEV_API_URL
@@ -15,13 +16,14 @@ const prodApiUrl = process.env.PROD_API_URL
 
 console.log(process.env.NODE_ENV)
 
-export default function Index({ data, videoShelves }: any) {
-  console.log(data)
+const Index: FC<HomeProps> = ({ data, videoShelvesData }) => {
+  console.log(videoShelvesData)
+
   return (
     <>
       <Hero
-        deaktopHeroUrl={data.Home_Hero.desktopImage.url}
-        mobileHeroUrl={data.Home_Hero.mobileImage.url}
+        desktopImage={data.Home_Hero.desktopImage}
+        mobileImage={data.Home_Hero.mobileImage}
       >
         <div className="absolute text-center text-white transform -translate-x-1/2 font-Montserrat whitespace-nowrap -translate-y-1/3 top-1/3 left-1/2 ">
           <div className="text-4xl font-semibold lg:text-5xl text-shadow ">
@@ -40,7 +42,7 @@ export default function Index({ data, videoShelves }: any) {
         servicesBgImage={data.Home_ServiceBgImage}
         homeServices={data.Home_Services}
       />
-      <Videos videoShelves={videoShelves} />
+      <VideoShelves videoShelves={videoShelvesData} showViewAllBtn={true} />
       <Section
         title="Read My Thesis"
         subTitle="The Role of Sports Psychologists in Treating Injuried Athletes"
@@ -68,13 +70,13 @@ export default function Index({ data, videoShelves }: any) {
   )
 }
 
-Index.getLayout = function getLayout(page: ReactElement) {
+;(Index as any).getLayout = function getLayout(page: ReactElement) {
   return <Layout>{page}</Layout>
 }
 
 export const getStaticProps: GetStaticProps = async () => {
   let data,
-    videoShelves = {}
+    videoShelvesData = {}
 
   const apiUrl = env === 'development' ? devApiUrl : prodApiUrl
 
@@ -86,7 +88,7 @@ export const getStaticProps: GetStaticProps = async () => {
 
   data = await getHomeData(apiUrl)
 
-  videoShelves = await Promise.all(
+  videoShelvesData = await Promise.all(
     data.video_shelves.map(async (video_shelf: any) => {
       const videoData = await getVideos(video_shelf.videos, apiUrl)
       video_shelf.videos = videoData
@@ -95,7 +97,7 @@ export const getStaticProps: GetStaticProps = async () => {
   )
 
   return {
-    props: { data, videoShelves },
+    props: { data, videoShelvesData },
   }
 }
 
@@ -118,3 +120,5 @@ async function getVideos(videoIds: string[], apiUrl: string) {
 
   return videos
 }
+
+export default Index

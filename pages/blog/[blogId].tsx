@@ -16,7 +16,7 @@ export default function Blog({ blog }: BlogProps) {
   console.log(blog)
   return (
     <>
-      <Hero deaktopHeroUrl={blog.Hero.url} mobileHeroUrl={blog.Hero.url}>
+      <Hero desktopImage={blog.Hero} mobileImage={blog.Hero}>
         <div className="w-10/12 text-center text-white lg:w-3/4 font-Montserrat lg:absoulte_center_top absoulte_center">
           <div className="text-lg font-semibold lg:text-5xl text-shadow">
             <h1 className="">{blog.title}</h1>

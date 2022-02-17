@@ -1,6 +1,6 @@
 import Socials from '@components/Socials'
 import { SocialsProps } from '@customTypes/SocialsProps'
-import getNavItems from 'lib/getNavItems'
+import { getNavItems } from 'lib/getNavItems'
 import { useRouter } from 'next/router'
 import React, { FC } from 'react'
 
@@ -10,7 +10,7 @@ const Footer: FC<SocialsProps> = ({ socialLinks }) => {
   const navItems = getNavItems(router.asPath)
 
   return (
-    <div className="w-full pt-5 pb-15 bg-cloudBurst">
+    <footer className="w-full pt-5 pb-15 bg-cloudBurst">
       {/* Socials */}
       <div className="mx-auto w-60">
         <Socials socialLinks={socialLinks} />
@@ -43,7 +43,7 @@ const Footer: FC<SocialsProps> = ({ socialLinks }) => {
           Cormac Levins
         </a>
       </p>
-    </div>
+    </footer>
   )
 }
 

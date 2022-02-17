@@ -1,12 +1,12 @@
-import React, { FunctionComponent } from 'react';
-import ReactMarkdown from 'react-markdown';
-import { AboutMeProps } from '@customTypes/AboutMeProps';
+import React, { FunctionComponent } from 'react'
+import ReactMarkdown from 'react-markdown'
+import { AboutMeSectionProps } from '@customTypes/AboutMeSectionProps'
 
 /* ToDo
  * Fix text placement on lg screens
  */
 
-const AboutMe: FunctionComponent<AboutMeProps> = ({
+const AboutMe: FunctionComponent<AboutMeSectionProps> = ({
   profileImage,
   aboutMeSections,
 }) => {
@@ -16,7 +16,7 @@ const AboutMe: FunctionComponent<AboutMeProps> = ({
         <h2>About Me</h2>
       </div>
       <div className="relative w-36 lg:w-48 h-0.5 mx-auto bg-thunder rounded-xl" />
-      <div className="grid w-10/12 grid-cols-1 mx-auto mt-8 mb-8 lg:mt-16 lg:mb-16 lg:gap-y-10 lg:grid-cols-3 font-Montserrat">
+      <div className="grid w-10/12 grid-cols-1 mx-auto mt-8 mb-8 max-w-250 lg:mt-16 lg:mb-16 lg:gap-y-10 lg:grid-cols-3 font-Montserrat">
         <div className="order-last w-4/5 max-w-sm mx-auto mt-10 lg:order-first lg:mx-0 lg:mt-0">
           <img className="shadow-2xl rounded-3xl" src={profileImage.url}></img>
         </div>
@@ -40,7 +40,7 @@ const AboutMe: FunctionComponent<AboutMeProps> = ({
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default AboutMe;
+export default AboutMe

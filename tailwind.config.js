@@ -18,6 +18,10 @@ module.exports = {
       textShadow: {
         default: '2px 2px 2px rgba(0, 0, 0, 0.4)',
       },
+      maxWidth: {
+        250: '68rem', //1000px
+        192: '48rem', //768rem
+      },
     },
   },
   variants: {

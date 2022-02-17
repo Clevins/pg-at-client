@@ -1,6 +1,6 @@
 import React, { FC } from 'react'
 import { VideoShelfProps, IVideo } from '@customTypes/VideoProps'
-import VideoCard from '@components/Videos/VideoCard'
+import VideoCard from '@components/VideoShelves/VideoCard'
 import ArrowIcon from '@icons/arrow.svg'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import SwiperCore, { Pagination, Navigation } from 'swiper/core'
@@ -12,7 +12,10 @@ import 'swiper/components/navigation/navigation.min.css'
 // install Swiper modules
 SwiperCore.use([Pagination, Navigation])
 
-const VideoShelf: FC<VideoShelfProps> = ({ videoShelfData }) => {
+const VideoShelf: FC<VideoShelfProps> = ({
+  videoShelfData,
+  showViewAllBtn,
+}) => {
   const { id, title, videos } = videoShelfData
   return (
     <div className="w-10/12 mx-auto mt-8 mb-8 lg:mt-16 lg:mb-16" key={id}>
@@ -21,12 +24,15 @@ const VideoShelf: FC<VideoShelfProps> = ({ videoShelfData }) => {
           <h3 className="">{title}</h3>
         </div>
         <div className="flex flex-row items-center justify-around outline-none text-darkTurquoise">
-          <a
-            href="/"
-            className="text-xl font-light font-Montserrat text-darkTurquoise"
-          >
-            <h3>View All</h3>
-          </a>
+          {showViewAllBtn && (
+            <a
+              href="/videos"
+              className="text-xl font-light font-Montserrat text-darkTurquoise"
+            >
+              <h3>View All</h3>
+            </a>
+          )}
+
           <div className={`ml-4 hidden sm:block swiper-button-prev-${id}`}>
             <button className="w-8 h-8 mt-1 outline-none fill-current focus:outline-none">
               <ArrowIcon />
@@ -72,7 +78,6 @@ const VideoShelf: FC<VideoShelfProps> = ({ videoShelfData }) => {
             )
           })}
         </Swiper>
-        <div className="relative w-full h-px mx-auto mt-10 opacity-30 bg-thunder rounded-xl" />
       </div>
     </div>
   )

@@ -4,7 +4,7 @@ import MenuIcon from '@icons/menu.svg'
 import { useRouter } from 'next/router'
 import Socials from '@components/Socials'
 import { SocialsProps } from '@customTypes/SocialsProps'
-import getNavItems from 'lib/getNavItems'
+import { getNavItems, isNavSolid } from 'lib/getNavItems'
 
 /* ToDo
  * Fix animation on mobile screens.
@@ -18,11 +18,13 @@ const Navbar: FunctionComponent<SocialsProps> = ({ socialLinks }) => {
 
   const navItems = getNavItems(router.asPath)
 
+  // const hasSolidNav = isNavSolid(router.asPath)
+  console.log(isNavSolid(router.asPath))
   return (
-    <div
-      className={`lg:absolute z-10 flex flex-row justify-between overflow-hidden w-full transition-all duration-500 ease-out text-white lg:justify-between  bg-transparent ${
-        mobileNavOpen ? ' h-72 bg-cloudBurst relative ' : ' h-14 absolute'
-      }  `}
+    <header
+      className={` z-10 flex flex-row  justify-between overflow-hidden w-full transition-all duration-500 ease-out text-white lg:justify-between 
+      ${mobileNavOpen ? ' h-72 bg-cloudBurst relative ' : ' h-14 absolute'}
+      ${isNavSolid(router.asPath) ? 'bg-cloudBurst relative' : 'absolute'}  `}
     >
       <div className="flex flex-col justify-start lg:items-center lg:w-full lg:justify-between lg:flex-row">
         {/* Logo */}
@@ -68,7 +70,7 @@ const Navbar: FunctionComponent<SocialsProps> = ({ socialLinks }) => {
           <MenuIcon />
         </button>
       </div>
-    </div>
+    </header>
   )
 }
 
